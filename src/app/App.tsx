@@ -91,9 +91,10 @@ export default function App() {
   return (
     <LanguageContext.Provider value={{ language, setLanguage, t }}>
       <CurrencyContext.Provider value={{ currency, setCurrency, convert }}>
-        <div className="relative w-full h-screen bg-[#050505] text-white overflow-hidden font-sans cursor-none">
+        <div className="relative w-full h-screen bg-[#000000] text-white overflow-hidden font-sans cursor-none">
           <style>
             {`
+              html, body { background-color: #000000; }
               @media (min-width: 768px) {
                 html, body, *, *::before, *::after { cursor: none !important; }
               }
@@ -107,6 +108,8 @@ export default function App() {
                 height: 100dvh;
                 overflow-x: hidden;
                 -webkit-overflow-scrolling: touch;
+                will-change: transform;
+                backface-visibility: hidden;
               }
               .snap-slide { 
                 scroll-snap-align: start; 
@@ -117,7 +120,10 @@ export default function App() {
                 position: relative; 
                 display: flex; 
                 align-items: center; 
-                overflow-x: hidden; 
+                overflow-x: hidden;
+                background: #000000;
+                will-change: transform;
+                backface-visibility: hidden;
               }
               ::-webkit-scrollbar { display: none; }
               .no-scrollbar::-webkit-scrollbar { display: none; }
