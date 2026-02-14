@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { motion, useMotionValue, useSpring, AnimatePresence } from "motion/react";
+import React, { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "motion/react";
 import { Slide1 } from "./components/Slide1";
 import { Slide2 } from "./components/Slide2";
 import { Slide3 } from "./components/Slide3";
@@ -16,37 +16,42 @@ import { Menu, X as CloseIcon } from "lucide-react";
 const slides = [Slide1, Slide2, Slide3, Slide4, Slide5, Slide6, Slide7, Slide8];
 
 const CustomCursor = () => {
-  const cursorX = useMotionValue(-100);
-  const cursorY = useMotionValue(-100);
-  const [isHovered, setIsHovered] = useState(false);
-  
-  const springConfig = { damping: 25, stiffness: 150 };
-  const x = useSpring(cursorX, springConfig);
-  const y = useSpring(cursorY, springConfig);
+  const cursorRef = useRef<HTMLDivElement>(null);
+  const rafId = useRef<number>(0);
+  const pos = useRef({ x: -100, y: -100 });
 
   useEffect(() => {
+    const el = cursorRef.current;
+    if (!el) return;
+
     const moveCursor = (e: MouseEvent) => {
-      cursorX.set(e.clientX);
-      cursorY.set(e.clientY);
-      const target = e.target as HTMLElement;
-      setIsHovered(
-        window.getComputedStyle(target).cursor === "pointer" || 
-        target.tagName === "BUTTON" || 
-        target.tagName === "A" ||
-        target.tagName === "INPUT" ||
-        target.tagName === "TEXTAREA" ||
-        target.tagName === "SELECT"
-      );
+      pos.current.x = e.clientX;
+      pos.current.y = e.clientY;
+
+      if (rafId.current) cancelAnimationFrame(rafId.current);
+      rafId.current = requestAnimationFrame(() => {
+        el.style.transform = `translate3d(${pos.current.x}px,${pos.current.y}px,0) translate(-50%,-50%)`;
+        rafId.current = 0;
+      });
     };
+
     window.addEventListener("mousemove", moveCursor);
-    return () => window.removeEventListener("mousemove", moveCursor);
-  }, [cursorX, cursorY]);
+    return () => {
+      window.removeEventListener("mousemove", moveCursor);
+      if (rafId.current) cancelAnimationFrame(rafId.current);
+    };
+  }, []);
 
   return (
-    <motion.div
-      className="fixed top-0 left-0 w-8 h-8 pointer-events-none z-[9999] rounded-full mix-blend-difference hidden md:block"
-      style={{ x, y, translateX: "-50%", translateY: "-50%", backgroundColor: isHovered ? "#D6001C" : "white", scale: isHovered ? 2.5 : 1 }}
-      transition={{ type: "spring", damping: 20 }}
+    <div
+      ref={cursorRef}
+      className="fixed top-0 left-0 w-8 h-8 pointer-events-none rounded-full hidden md:block"
+      style={{
+        transform: "translate3d(-100px,-100px,0) translate(-50%,-50%)",
+        backgroundColor: "#ffffff",
+        willChange: "transform",
+        zIndex: 2147483647,
+      }}
     />
   );
 };
@@ -86,10 +91,13 @@ export default function App() {
   return (
     <LanguageContext.Provider value={{ language, setLanguage, t }}>
       <CurrencyContext.Provider value={{ currency, setCurrency, convert }}>
-        <div className="relative w-full h-screen bg-[#050505] text-white overflow-hidden font-sans">
+        <div className="relative w-full h-screen bg-[#050505] text-white overflow-hidden font-sans cursor-none">
           <style>
             {`
-              .font-display { font-family: 'Syne', sans-serif; }
+              @media (min-width: 768px) {
+                html, body, *, *::before, *::after { cursor: none !important; }
+              }
+              .font-display { font-family: 'Syne', sans-serif; font-style: normal !important; }
               .font-mono-web3 { font-family: 'Space Grotesk', sans-serif; }
               .snap-container { 
                 scroll-behavior: smooth; 
