@@ -8,9 +8,9 @@ export const Slide6 = () => {
   const { t } = useContext(LanguageContext);
 
   const designFeatures = [
-    { icon: PenTool, title: "Logo & Brand", desc: "Kreiramo bezvremenske logotipe i kompletne brand book-ove." },
-    { icon: Layout, title: "UI Design", desc: "User-interface rješenja za aplikacije i sajtove visoke klase." },
-    { icon: Box, title: "Packaging", desc: "Dizajn ambalaže koji izdvaja vaš proizvod na polici." }
+    { icon: PenTool, titleKey: "design_logo_brand_title", descKey: "design_logo_brand_desc" },
+    { icon: Layout, titleKey: "design_ui_title", descKey: "design_ui_desc" },
+    { icon: Box, titleKey: "design_packaging_title", descKey: "design_packaging_desc" }
   ];
 
   return (
@@ -50,8 +50,8 @@ export const Slide6 = () => {
                     className="space-y-4"
                   >
                      <f.icon className="w-6 h-6 text-[#D6001C]" />
-                     <h4 className="font-display font-bold text-lg uppercase tracking-tight italic">{f.title}</h4>
-                     <p className="text-zinc-600 text-sm leading-relaxed">{f.desc}</p>
+                     <h4 className="font-display font-bold text-lg uppercase tracking-tight italic">{t(f.titleKey)}</h4>
+                     <p className="text-zinc-600 text-sm leading-relaxed">{t(f.descKey)}</p>
                   </motion.div>
                ))}
             </div>

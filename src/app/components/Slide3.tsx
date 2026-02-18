@@ -64,21 +64,21 @@ export const Slide3 = () => {
         {selectedService && (
           <motion.div 
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[200] flex items-center justify-center p-8 bg-black/90 backdrop-blur-2xl"
+            className="fixed inset-0 z-[200] flex items-center justify-center p-4 sm:p-6 md:p-8 bg-black/90 backdrop-blur-2xl"
             onClick={() => setSelectedService(null)}
           >
             <motion.div 
               initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }}
               onClick={(e) => e.stopPropagation()}
-              className="w-full max-w-lg bg-zinc-900 border border-white/5 rounded-[3rem] p-12 relative shadow-2xl text-center"
+              className="w-full max-w-lg bg-zinc-900 border border-white/5 rounded-2xl md:rounded-[3rem] p-6 sm:p-8 md:p-12 relative shadow-2xl text-center max-h-[90vh] overflow-y-auto"
             >
-              <button onClick={() => setSelectedService(null)} className="absolute top-8 right-8 w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors">
-                 <X className="w-5 h-5" />
+              <button onClick={() => setSelectedService(null)} className="absolute top-4 right-4 sm:top-6 sm:right-6 md:top-8 md:right-8 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors z-10">
+                 <X className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
-              <selectedService.icon className="w-16 h-16 text-[#D6001C] mx-auto mb-8" />
-              <h3 className="text-5xl font-display font-black mb-4 uppercase italic tracking-tighter">{selectedService.title}</h3>
-              <p className="text-zinc-400 mb-10 text-lg leading-relaxed font-sans">Premium service tailored for your business growth and market leadership.</p>
-              <button onClick={() => setSelectedService(null)} className="w-full py-5 rounded-2xl bg-[#D6001C] text-white font-mono-web3 font-black text-[10px] tracking-widest uppercase hover:bg-[#b50018] transition-all">
+              <selectedService.icon className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 text-[#D6001C] mx-auto mb-4 sm:mb-6 md:mb-8" />
+              <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-black mb-3 sm:mb-4 uppercase italic tracking-tighter break-words px-2">{selectedService.title}</h3>
+              <p className="text-zinc-400 mb-6 sm:mb-8 md:mb-10 text-sm sm:text-base md:text-lg leading-relaxed font-sans px-2">{t('service_modal_desc')}</p>
+              <button onClick={() => setSelectedService(null)} className="w-full py-3 sm:py-4 md:py-5 rounded-xl md:rounded-2xl bg-[#D6001C] text-white font-mono-web3 font-black text-[9px] sm:text-[10px] tracking-widest uppercase hover:bg-[#b50018] transition-all">
                 {t('btn_details')}
               </button>
             </motion.div>

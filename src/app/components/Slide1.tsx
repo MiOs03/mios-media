@@ -25,7 +25,7 @@ export const Slide1 = () => {
             transition={{ duration: 1 }}
             src={logo} 
             alt="Mios Media" 
-            className="h-20 md:h-28 mb-12 drop-shadow-[0_0_30px_rgba(214,0,28,0.2)]"
+            className="h-8 sm:h-10 md:h-20 lg:h-28 max-h-28 mb-6 sm:mb-8 md:mb-10 lg:mb-12 w-auto object-contain drop-shadow-[0_0_30px_rgba(214,0,28,0.2)]"
           />
 
           <motion.span 

@@ -30,7 +30,7 @@ export const Slide7 = () => {
                   <h3 className="text-3xl md:text-4xl font-display font-black uppercase italic tracking-tighter leading-none">
                     MODERN <br /> <span className="text-[#D6001C]">STACK</span>
                   </h3>
-                  <p className="text-zinc-500 text-sm leading-relaxed max-w-full md:max-w-[200px]">Next.js, Tailwind & React za munjevit odziv.</p>
+                  <p className="text-zinc-500 text-sm leading-relaxed max-w-full md:max-w-[200px]">{t('web_stack_desc')}</p>
                </div>
                <div className="flex flex-wrap gap-4 md:gap-6 mt-8 md:mt-0">
                   {stats.map(s => (

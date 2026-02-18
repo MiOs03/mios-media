@@ -33,9 +33,9 @@ export const Slide5 = () => {
             
             <div className="space-y-4">
               {[
-                { icon: Camera, title: "Photography", desc: "Profesionalna fotografija proizvoda, enterijera i lifestyle portreta." },
-                { icon: Video, title: "Cinematography", desc: "Snimanje visokokvalitetnih reklama i promotivnih videa." },
-                { icon: Film, title: "Post-Production", desc: "Montaža, color grading i sound design na vrhunskom nivou." }
+                { icon: Camera, titleKey: "prod_photography_title", descKey: "prod_photography_desc" },
+                { icon: Video, titleKey: "prod_cinematography_title", descKey: "prod_cinematography_desc" },
+                { icon: Film, titleKey: "prod_post_production_title", descKey: "prod_post_production_desc" }
               ].map((item, i) => (
                 <motion.div 
                   key={item.title}
@@ -48,8 +48,8 @@ export const Slide5 = () => {
                     <item.icon className="w-5 h-5 text-[#D6001C] group-hover:text-white" />
                   </div>
                   <div>
-                    <h4 className="font-display font-bold text-lg uppercase tracking-tight mb-1 italic">{item.title}</h4>
-                    <p className="text-zinc-500 text-sm font-sans">{item.desc}</p>
+                    <h4 className="font-display font-bold text-lg uppercase tracking-tight mb-1 italic">{t(item.titleKey)}</h4>
+                    <p className="text-zinc-500 text-sm font-sans">{t(item.descKey)}</p>
                   </div>
                 </motion.div>
               ))}

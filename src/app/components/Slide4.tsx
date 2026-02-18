@@ -12,19 +12,19 @@ const categories = [
 
 const pricingData = {
   social: [
-    { name: "START", price: 1200, features: ["2 platforme", "12 objava mjesečno", "Community management", "Osnovni report", "Story dizajn"] },
-    { name: "GROWTH", price: 1500, features: ["3 platforme", "20 objava mjesečno", "Copywriting", "Paid Ads setup", "Mesečni analytics"], popular: true },
-    { name: "ELITE", price: 1900, features: ["Sve platforme", "Daily posting", "Video reels (4/mj)", "Advanced Ads strategy", "Dedicated manager"] }
+    { name: "START", price: 1200, features: ["feat_2_platforms", "feat_12_posts_monthly", "feat_community_management", "feat_basic_report", "feat_story_design"] },
+    { name: "GROWTH", price: 1500, features: ["feat_3_platforms", "feat_20_posts_monthly", "feat_copywriting", "feat_paid_ads_setup", "feat_monthly_analytics"], popular: true },
+    { name: "ELITE", price: 1900, features: ["feat_all_platforms", "feat_daily_posting", "feat_video_reels", "feat_advanced_ads_strategy", "feat_dedicated_manager"] }
   ],
   web: [
-    { name: "LANDING", price: 800, features: ["Single page site", "Konverzioni fokus", "Mobile responsive", "SEO setup", "1 godina support"] },
-    { name: "BUSINESS", price: 1500, features: ["Multi-page site", "Custom CMS", "Blog integracija", "Advanced SEO", "Copywriting included"], popular: true },
-    { name: "E-COM", price: 2500, features: ["Online prodavnica", "Payment gateway", "Inventory management", "Sales automation", "Uputstva za rad"] }
+    { name: "LANDING", price: 800, features: ["feat_single_page_site", "feat_conversion_focus", "feat_mobile_responsive", "feat_seo_setup", "feat_1_year_support"] },
+    { name: "BUSINESS", price: 1500, features: ["feat_multi_page_site", "feat_custom_cms", "feat_blog_integration", "feat_advanced_seo", "feat_copywriting_included"], popular: true },
+    { name: "E-COM", price: 2500, features: ["feat_online_store", "feat_payment_gateway", "feat_inventory_management", "feat_sales_automation", "feat_work_instructions"] }
   ],
   production: [
-    { name: "VISUAL", price: 400, features: ["Logo dizajn", "Knjiga standarda", "Vizit karte dizajn", "Banners pack", "Print prep"] },
-    { name: "CONTENT", price: 600, features: ["Professional photo", "10 obrađenih slika", "Short-form video (2)", "Editing included", "Commercial rights"], popular: true },
-    { name: "FULL CAMPAIGN", price: 1200, features: ["Kvartalna strategija", "Full video ad (30s)", "Photo session", "Billboard dizajn", "PR objava"] }
+    { name: "VISUAL", price: 400, features: ["feat_logo_design", "feat_brand_guidelines", "feat_business_cards", "feat_banners_pack", "feat_print_prep"] },
+    { name: "CONTENT", price: 600, features: ["feat_professional_photo", "feat_10_processed_images", "feat_short_form_video", "feat_editing_included", "feat_commercial_rights"], popular: true },
+    { name: "FULL CAMPAIGN", price: 1200, features: ["feat_quarterly_strategy", "feat_full_video_ad", "feat_photo_session", "feat_billboard_design", "feat_pr_release"] }
   ]
 };
 
@@ -77,7 +77,7 @@ export const Slide4 = () => {
                 >
                   {pkg.popular && (
                     <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#D6001C] text-white text-[7px] md:text-[8px] font-mono-web3 font-black px-3 py-1 rounded-full uppercase tracking-widest shadow-xl whitespace-nowrap">
-                      MOST POPULAR
+                      {t('label_most_popular')}
                     </div>
                   )}
                   
@@ -95,13 +95,13 @@ export const Slide4 = () => {
                         <div className="w-4 h-4 md:w-5 md:h-5 rounded-full bg-zinc-900 border border-white/5 flex items-center justify-center mt-0.5 shrink-0 group-hover:border-[#D6001C] transition-colors">
                           <Check className="w-2.5 h-2.5 md:w-3 md:h-3 text-[#D6001C]" />
                         </div>
-                        <span className="text-zinc-400 text-xs md:text-sm font-sans leading-tight">{feat}</span>
+                        <span className="text-zinc-400 text-xs md:text-sm font-sans leading-tight">{t(feat)}</span>
                       </div>
                     ))}
                   </div>
 
                   <button className={`w-full py-4 md:py-5 rounded-xl md:rounded-2xl font-mono-web3 font-black text-[9px] md:text-[10px] tracking-widest uppercase transition-all flex items-center justify-center gap-2 md:gap-3 ${pkg.popular ? "bg-[#D6001C] text-white" : "bg-white/5 text-zinc-400 hover:bg-white/10"}`}>
-                    ODABERI PAKET
+                    {t('btn_select_package')}
                     <ArrowRight className="w-3.5 h-3.5" />
                   </button>
                 </div>
