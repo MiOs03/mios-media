@@ -60,7 +60,7 @@ export const Slide5 = () => {
             <motion.div 
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              className="h-[300px] lg:h-full rounded-[2rem] md:rounded-[3rem] overflow-hidden border border-white/5"
+              className="h-[220px] sm:h-[260px] lg:h-full rounded-[2rem] md:rounded-[3rem] overflow-hidden border border-white/5"
             >
               <ImageWithFallback 
                 src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?auto=format&fit=crop&q=80&w=800"
@@ -72,7 +72,7 @@ export const Slide5 = () => {
               initial={{ opacity: 0, y: -30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="h-[300px] lg:h-full rounded-[2rem] md:rounded-[3rem] overflow-hidden border border-white/5 lg:translate-y-12"
+              className="h-[220px] sm:h-[260px] lg:h-full rounded-[2rem] md:rounded-[3rem] overflow-hidden border border-white/5 lg:translate-y-12"
             >
               <ImageWithFallback 
                 src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&q=80&w=800"

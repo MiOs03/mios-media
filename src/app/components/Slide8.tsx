@@ -36,7 +36,9 @@ export const Slide8 = () => {
               </div>
               <div>
                 <p className="text-zinc-600 text-[9px] font-mono-web3 uppercase tracking-widest mb-1">Email Us</p>
-                <p className="text-xl font-display font-bold uppercase tracking-tight italic">hello@miosmedia.com</p>
+                <a href="mailto:info@mios.agency" className="block text-xl font-display font-bold uppercase tracking-tight italic hover:text-[#D6001C] transition-colors">
+                  info@mios.agency
+                </a>
               </div>
             </div>
             <div className="flex items-center gap-6 group">
@@ -81,8 +83,14 @@ export const Slide8 = () => {
       <div className="mt-20 flex justify-between items-center border-t border-white/5 pt-12">
          <p className="text-zinc-600 text-[9px] font-mono-web3 uppercase tracking-widest">© 2026 MIOS MEDIA AGENCY • {t('footer_rights')}</p>
          <div className="flex gap-6">
-            <Instagram className="w-5 h-5 text-zinc-500 hover:text-white transition-colors cursor-pointer" />
-            <Linkedin className="w-5 h-5 text-zinc-500 hover:text-white transition-colors cursor-pointer" />
+            <a
+              href="https://www.instagram.com/mios.agency/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Mios Media on Instagram"
+            >
+              <Instagram className="w-5 h-5 text-zinc-500 hover:text-white transition-colors cursor-pointer" />
+            </a>
          </div>
       </div>
     </motion.div>
