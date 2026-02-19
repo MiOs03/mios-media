@@ -31,8 +31,8 @@ export const Slide8 = () => {
 
           <div className="space-y-8">
             <div className="flex items-center gap-6 group">
-              <div className="w-14 h-14 rounded-full bg-zinc-900 flex items-center justify-center border border-white/5 group-hover:border-[#D6001C] transition-colors">
-                <Mail className="w-5 h-5 text-zinc-500 group-hover:text-[#D6001C]" />
+              <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-zinc-900 flex items-center justify-center border border-white/5 group-hover:border-[#D6001C] transition-colors">
+                <Mail className="w-5 h-5 md:w-6 md:h-6 text-zinc-500 group-hover:text-[#D6001C]" />
               </div>
               <div>
                 <p className="text-zinc-600 text-[9px] font-mono-web3 uppercase tracking-widest mb-1">Email Us</p>
@@ -40,8 +40,8 @@ export const Slide8 = () => {
               </div>
             </div>
             <div className="flex items-center gap-6 group">
-              <div className="w-14 h-14 rounded-full bg-zinc-900 flex items-center justify-center border border-white/5 group-hover:border-[#D6001C] transition-colors">
-                <MapPin className="w-5 h-5 text-zinc-500 group-hover:text-[#D6001C]" />
+              <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-zinc-900 flex items-center justify-center border border-white/5 group-hover:border-[#D6001C] transition-colors">
+                <MapPin className="w-5 h-5 md:w-6 md:h-6 text-zinc-500 group-hover:text-[#D6001C]" />
               </div>
               <div>
                 <p className="text-zinc-600 text-[9px] font-mono-web3 uppercase tracking-widest mb-1">Location</p>

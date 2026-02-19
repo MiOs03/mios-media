@@ -236,8 +236,9 @@ export default function App() {
             </div>
           </div>
 
+          {/* Subtle static background glow (no animation for performance) */}
           <div className="fixed inset-0 z-0 opacity-20 pointer-events-none">
-            <motion.div animate={{ x: [0, 30, 0], y: [0, 20, 0] }} transition={{ duration: 10, repeat: Infinity }} className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#D6001C]/10 via-transparent to-zinc-900/20 blur-[120px]" />
+            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#D6001C]/15 via-transparent to-zinc-900/30 blur-[80px]" />
           </div>
           <div className="fixed inset-0 z-[60] pointer-events-none opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay" />
         </div>
