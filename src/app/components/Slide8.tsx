@@ -4,7 +4,7 @@ import { Mail, MapPin, Instagram, Linkedin, Send } from "lucide-react";
 import { LanguageContext } from "../context/LanguageContext";
 
 export const Slide8 = () => {
-  const { t } = useContext(LanguageContext);
+  const { t, language } = useContext(LanguageContext);
   const [fullName, setFullName] = useState("");
   const [service, setService] = useState("Social Media Management");
   const [message, setMessage] = useState("");
@@ -30,6 +30,7 @@ export const Slide8 = () => {
           phone,
           service,
           message,
+          language,
         }),
       });
 
@@ -46,7 +47,11 @@ export const Slide8 = () => {
     } catch (error) {
       console.error("Failed to send email", error);
       setStatus("error");
-      setErrorMessage("Došlo je do greške prilikom slanja poruke. Pokušajte ponovo.");
+      setErrorMessage(
+        language === "EN"
+          ? "An error occurred. Please try again."
+          : "Došlo je do greške. Pokušajte ponovo."
+      );
     }
   };
 
@@ -100,7 +105,9 @@ export const Slide8 = () => {
         <div className="bg-white/5 border border-white/5 rounded-[3rem] p-12">
            <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="space-y-2">
-                 <label className="text-[9px] font-mono-web3 uppercase tracking-widest text-zinc-500 ml-4">Full Name</label>
+                 <label className="text-[9px] font-mono-web3 uppercase tracking-widest text-zinc-500 ml-4">
+                  {t("contact_full_name")}
+                 </label>
                  <input 
                   type="text" 
                   placeholder="John Doe" 
@@ -110,7 +117,9 @@ export const Slide8 = () => {
                  />
               </div>
               <div className="space-y-2">
-                 <label className="text-[9px] font-mono-web3 uppercase tracking-widest text-zinc-500 ml-4">Email Address</label>
+                 <label className="text-[9px] font-mono-web3 uppercase tracking-widest text-zinc-500 ml-4">
+                  {t("contact_email")}
+                 </label>
                  <input 
                   type="email" 
                   placeholder="john.doe@example.com" 
@@ -121,7 +130,9 @@ export const Slide8 = () => {
                  />
               </div>
               <div className="space-y-2">
-                 <label className="text-[9px] font-mono-web3 uppercase tracking-widest text-zinc-500 ml-4">Phone Number</label>
+                 <label className="text-[9px] font-mono-web3 uppercase tracking-widest text-zinc-500 ml-4">
+                  {t("contact_phone")}
+                 </label>
                  <input 
                   type="tel" 
                   placeholder="+387 61 123 456" 
@@ -131,7 +142,9 @@ export const Slide8 = () => {
                  />
               </div>
               <div className="space-y-2">
-                 <label className="text-[9px] font-mono-web3 uppercase tracking-widest text-zinc-500 ml-4">Service Required</label>
+                 <label className="text-[9px] font-mono-web3 uppercase tracking-widest text-zinc-500 ml-4">
+                  {t("contact_service")}
+                 </label>
                  <select 
                   className="w-full bg-zinc-900 border border-white/5 rounded-2xl px-6 py-4 font-sans text-sm focus:outline-none focus:border-[#D6001C] transition-colors appearance-none text-zinc-400"
                   value={service}
@@ -144,7 +157,9 @@ export const Slide8 = () => {
                  </select>
               </div>
               <div className="space-y-2">
-                 <label className="text-[9px] font-mono-web3 uppercase tracking-widest text-zinc-500 ml-4">Message</label>
+                 <label className="text-[9px] font-mono-web3 uppercase tracking-widest text-zinc-500 ml-4">
+                  {t("contact_message")}
+                 </label>
                  <textarea 
                   rows={4} 
                   placeholder="Tell us about your project..." 
@@ -155,7 +170,9 @@ export const Slide8 = () => {
               </div>
               {status === "success" && (
                 <p className="text-xs text-green-400 font-mono-web3">
-                  Message sent successfully!
+                  {language === "EN"
+                    ? "Message sent successfully!"
+                    : "Poruka je uspješno poslana!"}
                 </p>
               )}
               {status === "error" && (

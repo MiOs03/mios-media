@@ -113,6 +113,12 @@ export const translations = {
     design_ui_desc: "User-interface rješenja za aplikacije i sajtove visoke klase.",
     design_packaging_title: "Packaging",
     design_packaging_desc: "Dizajn ambalaže koji izdvaja vaš proizvod na polici.",
+    // Contact form labels
+    contact_full_name: "Puno ime",
+    contact_email: "Email adresa",
+    contact_phone: "Broj telefona",
+    contact_service: "Tražena usluga",
+    contact_message: "Poruka",
   },
   EN: {
     nav_about: "About",
@@ -218,6 +224,12 @@ export const translations = {
     design_ui_desc: "User-interface solutions for high-class applications and websites.",
     design_packaging_title: "Packaging",
     design_packaging_desc: "Packaging design that makes your product stand out on the shelf.",
+    // Contact form labels
+    contact_full_name: "Full Name",
+    contact_email: "Email Address",
+    contact_phone: "Phone Number",
+    contact_service: "Service Required",
+    contact_message: "Message",
   },
   DE: {
     nav_about: "Über uns",
@@ -323,5 +335,11 @@ export const translations = {
     design_ui_desc: "Benutzeroberflächenlösungen für hochwertige Anwendungen und Websites.",
     design_packaging_title: "Verpackung",
     design_packaging_desc: "Verpackungsdesign, das Ihr Produkt im Regal hervorhebt.",
+    // Contact form labels
+    contact_full_name: "Vollständiger Name",
+    contact_email: "E-Mail-Adresse",
+    contact_phone: "Telefonnummer",
+    contact_service: "Gewünschte Leistung",
+    contact_message: "Nachricht",
   }
 };

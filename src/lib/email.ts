@@ -30,7 +30,7 @@ export async function sendEmail({
   const to = ["it.ostojic@gmail.com", "info@mios.agency"];
 
   return resend.emails.send({
-    from: "Mios Agency <info@mios.agency>",
+    from: "Mios Agency <system@mios.agency>",
     to,
     subject,
     html,
