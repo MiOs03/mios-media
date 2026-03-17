@@ -1,10 +1,54 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { motion } from "motion/react";
 import { Mail, MapPin, Instagram, Linkedin, Send } from "lucide-react";
 import { LanguageContext } from "../context/LanguageContext";
 
 export const Slide8 = () => {
   const { t } = useContext(LanguageContext);
+  const [fullName, setFullName] = useState("");
+  const [service, setService] = useState("Social Media Management");
+  const [message, setMessage] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("loading");
+    setErrorMessage(null);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          fullName,
+          email,
+          phone,
+          service,
+          message,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to send message");
+      }
+
+      setStatus("success");
+      setFullName("");
+      setService("Social Media Management");
+      setMessage("");
+      setEmail("");
+      setPhone("");
+    } catch (error) {
+      console.error("Failed to send email", error);
+      setStatus("error");
+      setErrorMessage("Došlo je do greške prilikom slanja poruke. Pokušajte ponovo.");
+    }
+  };
 
   return (
     <motion.div 
@@ -54,14 +98,45 @@ export const Slide8 = () => {
         </div>
 
         <div className="bg-white/5 border border-white/5 rounded-[3rem] p-12">
-           <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+           <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="space-y-2">
                  <label className="text-[9px] font-mono-web3 uppercase tracking-widest text-zinc-500 ml-4">Full Name</label>
-                 <input type="text" placeholder="John Doe" className="w-full bg-zinc-900 border border-white/5 rounded-2xl px-6 py-4 font-sans text-sm focus:outline-none focus:border-[#D6001C] transition-colors" />
+                 <input 
+                  type="text" 
+                  placeholder="John Doe" 
+                  className="w-full bg-zinc-900 border border-white/5 rounded-2xl px-6 py-4 font-sans text-sm focus:outline-none focus:border-[#D6001C] transition-colors" 
+                  value={fullName}
+                  onChange={(e) => setFullName(e.target.value)}
+                 />
+              </div>
+              <div className="space-y-2">
+                 <label className="text-[9px] font-mono-web3 uppercase tracking-widest text-zinc-500 ml-4">Email Address</label>
+                 <input 
+                  type="email" 
+                  placeholder="john.doe@example.com" 
+                  className="w-full bg-zinc-900 border border-white/5 rounded-2xl px-6 py-4 font-sans text-sm focus:outline-none focus:border-[#D6001C] transition-colors" 
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                 />
+              </div>
+              <div className="space-y-2">
+                 <label className="text-[9px] font-mono-web3 uppercase tracking-widest text-zinc-500 ml-4">Phone Number</label>
+                 <input 
+                  type="tel" 
+                  placeholder="+387 61 123 456" 
+                  className="w-full bg-zinc-900 border border-white/5 rounded-2xl px-6 py-4 font-sans text-sm focus:outline-none focus:border-[#D6001C] transition-colors" 
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                 />
               </div>
               <div className="space-y-2">
                  <label className="text-[9px] font-mono-web3 uppercase tracking-widest text-zinc-500 ml-4">Service Required</label>
-                 <select className="w-full bg-zinc-900 border border-white/5 rounded-2xl px-6 py-4 font-sans text-sm focus:outline-none focus:border-[#D6001C] transition-colors appearance-none text-zinc-400">
+                 <select 
+                  className="w-full bg-zinc-900 border border-white/5 rounded-2xl px-6 py-4 font-sans text-sm focus:outline-none focus:border-[#D6001C] transition-colors appearance-none text-zinc-400"
+                  value={service}
+                  onChange={(e) => setService(e.target.value)}
+                 >
                     <option>Social Media Management</option>
                     <option>Video Production</option>
                     <option>Graphic Design & AI</option>
@@ -70,10 +145,32 @@ export const Slide8 = () => {
               </div>
               <div className="space-y-2">
                  <label className="text-[9px] font-mono-web3 uppercase tracking-widest text-zinc-500 ml-4">Message</label>
-                 <textarea rows={4} placeholder="Tell us about your project..." className="w-full bg-zinc-900 border border-white/5 rounded-2xl px-6 py-4 font-sans text-sm focus:outline-none focus:border-[#D6001C] transition-colors resize-none"></textarea>
+                 <textarea 
+                  rows={4} 
+                  placeholder="Tell us about your project..." 
+                  className="w-full bg-zinc-900 border border-white/5 rounded-2xl px-6 py-4 font-sans text-sm focus:outline-none focus:border-[#D6001C] transition-colors resize-none"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                 />
               </div>
-              <button className="w-full bg-[#D6001C] py-5 rounded-2xl flex items-center justify-center gap-3 hover:bg-[#b50018] transition-all group">
-                 <span className="font-mono-web3 font-black text-[10px] uppercase tracking-widest">{t('btn_inquiry')}</span>
+              {status === "success" && (
+                <p className="text-xs text-green-400 font-mono-web3">
+                  Message sent successfully!
+                </p>
+              )}
+              {status === "error" && (
+                <p className="text-xs text-red-400 font-mono-web3">
+                  {errorMessage}
+                </p>
+              )}
+              <button 
+                type="submit"
+                className="w-full bg-[#D6001C] py-5 rounded-2xl flex items-center justify-center gap-3 hover:bg-[#b50018] transition-all group disabled:opacity-60 disabled:cursor-not-allowed"
+                disabled={status === "loading"}
+              >
+                 <span className="font-mono-web3 font-black text-[10px] uppercase tracking-widest">
+                  {status === "loading" ? "Slanje..." : t('btn_inquiry')}
+                 </span>
                  <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
               </button>
            </form>
