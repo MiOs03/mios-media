@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { sendEmail } from "../src/lib/email";
+import { Resend } from "resend";
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== "POST") {
@@ -20,6 +20,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return;
   }
 
+  const apiKey = process.env.RESEND_API_KEY;
+
+  if (!apiKey) {
+    console.error("RESEND_API_KEY is not set in environment variables.");
+    res.status(500).json({ error: "Email service is not configured on the server." });
+    return;
+  }
+
+  const resend = new Resend(apiKey);
+
   const subject = `New Lead: ${fullName} - ${service}`;
 
   const html = `
@@ -33,10 +43,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   `;
 
   try {
-    await sendEmail({
+    await resend.emails.send({
+      from: "Mios Agency <info@mios.agency>",
+      to: ["it.ostojic@gmail.com", "info@mios.agency"],
       subject,
       html,
-      replyTo: email,
+      reply_to: email,
     });
 
     res.status(200).json({ success: true });
