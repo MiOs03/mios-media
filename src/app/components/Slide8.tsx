@@ -1,7 +1,8 @@
 import React, { useContext, useState } from "react";
 import { motion } from "motion/react";
-import { Mail, MapPin, Instagram, Linkedin, Send } from "lucide-react";
+import { Mail, MapPin, Send } from "lucide-react";
 import { LanguageContext } from "../context/LanguageContext";
+import { SocialLinksRow } from "./SocialLinks";
 
 export const Slide8 = () => {
   const { t, language } = useContext(LanguageContext);
@@ -194,18 +195,9 @@ export const Slide8 = () => {
         </div>
       </div>
 
-      <div className="mt-20 flex justify-between items-center border-t border-white/5 pt-12">
-         <p className="text-zinc-600 text-[9px] font-mono-web3 uppercase tracking-widest">© 2026 MIOS MEDIA AGENCY • {t('footer_rights')}</p>
-         <div className="flex gap-6">
-            <a
-              href="https://www.instagram.com/mios.agency/"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Mios Media on Instagram"
-            >
-              <Instagram className="w-5 h-5 text-zinc-500 hover:text-white transition-colors cursor-pointer" />
-            </a>
-         </div>
+      <div className="mt-20 flex flex-col sm:flex-row justify-between items-center gap-6 border-t border-white/5 pt-12">
+         <p className="text-zinc-600 text-[9px] font-mono-web3 uppercase tracking-widest text-center sm:text-left">© 2026 MIOS MEDIA AGENCY • {t('footer_rights')}</p>
+         <SocialLinksRow className="flex gap-6 md:hidden" />
       </div>
     </motion.div>
   );

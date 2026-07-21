@@ -3,28 +3,22 @@ import { motion, AnimatePresence } from "motion/react";
 import { Slide1 } from "./components/Slide1";
 import { Slide2 } from "./components/Slide2";
 import { Slide3 } from "./components/Slide3";
-import { Slide4 } from "./components/Slide4";
 import { Slide5 } from "./components/Slide5";
 import { Slide6 } from "./components/Slide6";
 import { Slide7 } from "./components/Slide7";
 import { Slide8 } from "./components/Slide8";
-import { CurrencyContext } from "./context/CurrencyContext";
 import { LanguageContext, translations, Language } from "./context/LanguageContext";
 import logo from "../assets/6725b585f15935842ec833c425216b873e445e32.png";
+import { SocialSidebar } from "./components/SocialSidebar";
+import { SocialLinksRow } from "./components/SocialLinks";
 import { Menu, X as CloseIcon } from "lucide-react";
 
-const slides = [Slide1, Slide2, Slide3, Slide4, Slide5, Slide6, Slide7, Slide8];
+const slides = [Slide1, Slide2, Slide3, Slide5, Slide6, Slide7, Slide8];
 
 export default function App() {
-  const [currency, setCurrency] = useState("KM");
   const [language, setLanguage] = useState<Language>("BS");
   const [activeSlide, setActiveSlide] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  const convert = (kmValue: number) => {
-    if (currency === "KM") return kmValue.toLocaleString();
-    return Math.round(kmValue * 0.51).toLocaleString();
-  };
 
   const t = (key: string) => {
     return (translations[language] as any)[key] || key;
@@ -49,7 +43,6 @@ export default function App() {
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage, t }}>
-      <CurrencyContext.Provider value={{ currency, setCurrency, convert }}>
         <div className="relative w-full h-screen bg-[#000000] text-white overflow-hidden font-sans">
           <style>
             {`
@@ -133,10 +126,10 @@ export default function App() {
                   loading="eager"
                 />
                 <div className="hidden lg:flex items-center gap-10 font-mono-web3 text-[8px] uppercase font-black tracking-[0.3em] text-zinc-500">
-                  {(['nav_about', 'nav_services', 'nav_pricing', 'nav_contact'] as const).map((key, i) => {
-                    const slideIndices = [1, 2, 3, 7];
+                  {(['nav_about', 'nav_services', 'nav_contact'] as const).map((key, i) => {
+                    const slideIndices = [1, 2, 6];
                     const targetIdx = slideIndices[i];
-                    const isActive = activeSlide === targetIdx || (i === 2 && activeSlide === 3);
+                    const isActive = activeSlide === targetIdx;
                     return (
                       <button 
                         key={key}
@@ -157,12 +150,6 @@ export default function App() {
                     <button key={l} onClick={() => setLanguage(l)} className={`px-2 sm:px-2.5 md:px-3 lg:px-4 h-full rounded-full text-[7px] sm:text-[8px] font-black transition-all ${language === l ? "bg-white text-black shadow-lg" : "text-zinc-500 hover:text-white"}`}>{l}</button>
                   ))}
                 </div>
-                <button 
-                  onClick={() => setCurrency(currency === "KM" ? "EUR" : "KM")}
-                  className="hidden md:flex px-6 h-8 rounded-full bg-[#D6001C] text-white text-[8px] font-black tracking-widest uppercase hover:bg-[#b50018] transition-all items-center gap-2 shadow-lg"
-                >
-                  {currency}
-                </button>
                 <button 
                   onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                   className="lg:hidden w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/5 flex items-center justify-center border border-white/10 active:bg-white/10 transition-colors"
@@ -185,8 +172,8 @@ export default function App() {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <div className="flex flex-col gap-6 sm:gap-8 text-center w-full max-w-xs">
-                  {(['nav_about', 'nav_services', 'nav_pricing', 'nav_contact'] as const).map((key, i) => {
-                    const slideIndices = [1, 2, 3, 7];
+                  {(['nav_about', 'nav_services', 'nav_contact'] as const).map((key, i) => {
+                    const slideIndices = [1, 2, 6];
                     return (
                       <button 
                         key={key}
@@ -198,14 +185,11 @@ export default function App() {
                     );
                   })}
                 </div>
-                <div className="mt-12 sm:mt-16 flex flex-col sm:flex-row gap-3 sm:gap-4 w-full max-w-xs">
-                  <button 
-                    onClick={() => { setCurrency(currency === "KM" ? "EUR" : "KM"); setMobileMenuOpen(false); }}
-                    className="px-6 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl bg-white/5 border border-white/10 font-mono-web3 text-[9px] sm:text-[10px] font-black uppercase tracking-widest hover:bg-white/10 transition-colors"
-                  >
-                    {t('label_currency')}: {currency}
-                  </button>
-                </div>
+                <SocialLinksRow
+                  className="mt-10 flex gap-8 justify-center"
+                  iconClassName="w-6 h-6 text-zinc-400 transition-colors duration-300"
+                  onLinkClick={() => setMobileMenuOpen(false)}
+                />
               </motion.div>
             )}
           </AnimatePresence>
@@ -217,6 +201,8 @@ export default function App() {
               </section>
             ))}
           </main>
+
+          <SocialSidebar />
 
           {/* Progress Tracker (Hidden on Mobile) */}
           <div className="fixed bottom-12 right-12 z-[100] hidden md:flex flex-col items-center gap-6">
@@ -242,7 +228,6 @@ export default function App() {
           </div>
           <div className="fixed inset-0 z-[60] pointer-events-none opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay" />
         </div>
-      </CurrencyContext.Provider>
     </LanguageContext.Provider>
   );
 }
